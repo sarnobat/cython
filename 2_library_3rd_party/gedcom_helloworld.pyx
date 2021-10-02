@@ -1,21 +1,17 @@
 from gedcom.element.individual import IndividualElement
+from gedcom.element.root import RootElement
 from gedcom.parser import Parser
 
 # Path to your `.ged` file
 file_path = 'rohidekar2.ged'
 
-# Initialize the parser
 gedcom_parser = Parser()
-
-# Parse your file
 gedcom_parser.parse_file(file_path)
 
 root_child_elements = gedcom_parser.get_root_child_elements()
 
-# Iterate through all root child elements
 for element in root_child_elements:
 
-    # Is the `element` an actual `IndividualElement`? (Allows usage of extra functions such as `surname_match` and `get_name`.)
     if isinstance(element, IndividualElement):
 
         # Get all individuals whose surname matches "Doe"
@@ -26,3 +22,27 @@ for element in root_child_elements:
 
             # Print the first and last name of the found individual
             print(first + " " + last)
+
+            for familyElement in gedcom_parser.get_families(element):
+                print("5")
+                
+#    if isinstance(element, RootElement):
+#        print("6")
+
+root_element = gedcom_parser.get_root_element()
+print(type(root_element))
+#print(root_element.to_gedcom_string(True))
+#print(root_element.get_pointer())
+#print(root_element.get_individual())
+#print(root_element.get_child_elements())
+# (first, last) = root_element.get_name()
+# print(first + " " + last)
+    
+elemDict = gedcom_parser.get_element_dictionary()
+
+rootElem = elemDict.get("@I29@") # Venkat Rao Rohidekar
+(first, last) = rootElem.get_name()
+print(first + " " + last)
+families = gedcom_parser.get_families(rootElem)
+print(len(families))
+print(families[0])
