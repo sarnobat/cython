@@ -5,7 +5,7 @@ from langchain import OpenAI
 import sys
 import os
 
-os.environ["OPENAI_API_KEY"] = "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"
+# os.environ["OPENAI_API_KEY"] = "foobar"
 
 max_input = 4096
 tokens = 200
