@@ -13,10 +13,10 @@ csv_reader = csv.DictReader(sys.stdin, fieldnames=['filepath'])
 
 for row in csv_reader:
 	print(row['filepath'])
-	for term in row.values():
-		print("lll ",term)
+	for term in row[None]:
 	
-	result_df = df.loc[df['term'] == row['terms']]
-	if len(result_df) > 0:	
-		print(result_df.code.values[0])
+		result_df = df.loc[df['term'] == term]
+		if len(result_df) > 0:	
+
+			print(result_df.code.values[0]," ---- ",term)
 	print("--------------------")
